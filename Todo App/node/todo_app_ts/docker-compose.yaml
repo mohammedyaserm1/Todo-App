@@ -1,0 +1,19 @@
+services:
+  yaser_mongo_db:
+    image: mongo:7
+    container_name: yaser_mongo_db
+    ports:
+      - "3001:27017"
+    volumes:
+      - yaser_mongo_data:/data/db
+
+  yaser_node_app:
+    build: .
+    container_name: yaser_todo_app_container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - yaser_mongo_db
+
+volumes:
+  yaser_mongo_data:
